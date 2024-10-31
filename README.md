@@ -1,64 +1,108 @@
-# Title: Text Analysis with NLTK: Frequency Distribution Visualization
+# NLTK Text Analysis Code Documentation
 
-***
+## Code Structure and Documentation
 
-## Introduction:
+### Library Installation and Imports
+```python
+# Install and import required libraries
+!pip install nltk
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.probability import FreqDist
+import matplotlib.pyplot as plt
+```
 
-This document outlines the process of analyzing text using the Natural Language Toolkit (NLTK) library in Python. We'll focus on creating a frequency distribution of tokens (words) in a sample text and visualizing the results with two plotting methods.
+### NLTK Data Download
+```python
+# Download required NLTK data
+nltk.download('punkt')
+```
 
-***
+### Text Sample Definition
+```python
+# Create sample text
+text = """
+There was no possibility of taking a walk that day.  We had been
+wandering, indeed, in the leafless shrubbery an hour in the morning; but
+since dinner (Mrs. Reed, when there was no company, dined early) the cold
+winter wind had brought with it clouds so sombre, and a rain so
+penetrating, that further out-door exercise was now out of the question.
+"""
+```
 
-## Prerequisites:
+### Text Processing
+```python
+# Tokenize the text
+tokens = word_tokenize(text)
 
-    * Python 3.x installed
-    * NLTK library (```pip install nltk```)
-    * Matplotlib library (```pip install matplotlib```)
+# Create frequency distribution
+freq_dist = FreqDist(tokens)
 
-***
+# Print frequencies to verify we have data
+print("Top 10 most frequent tokens:")
+for word, freq in freq_dist.most_common(10):
+    print(f"{word}: {freq}")
+```
 
-## Steps:
+### Visualization Methods
 
-### Install and Import Libraries:
-Install NLTK using pip install nltk.
-Import necessary libraries:
-    * nltk: For natural language processing tasks.
-    word_tokenize from nltk.tokenize: To split text into words.
-    * FreqDist from nltk.probability: To calculate word frequencies.
-    matplotlib.pyplot as plt: For creating visualizations.
+#### Method 1: NLTK Built-in Plot
+```python
+# Create and display the plot
+plt.figure(figsize=(12, 6))
+# Plot the 20 most common tokens
+freq_dist.plot(20)  # This is a built-in plotting method from NLTK
+plt.title('Frequency Distribution of Tokens')
+plt.xlabel('Tokens')
+plt.ylabel('Frequency')
+plt.xticks(rotation=45)
+plt.tight_layout()  # Adjust layout to prevent label cutoff
+plt.show()
+```
 
-### Download Required NLTK Data:
-    Use nltk.download('punkt') to download the tokenizer model for sentence segmentation.
+#### Method 2: Custom Matplotlib Plot
+```python
+# Alternative plot using matplotlib directly
+plt.figure(figsize=(12, 6))
+words = [word for word, freq in freq_dist.most_common(20)]
+freqs = [freq for word, freq in freq_dist.most_common(20)]
+plt.bar(words, freqs)
+plt.title('Frequency Distribution of Tokens')
+plt.xlabel('Tokens')
+plt.ylabel('Frequency')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+```
 
-### Create Sample Text:
-    Define a string variable text containing the sample text you want to analyze.
+## Code Explanation
 
-### Tokenize the Text:
-    Apply word_tokenize(text) to split the text into individual words (tokens).
-    This stores the tokens in a list named tokens.
+### 1. Setup Phase
+- Installs NLTK library using pip
+- Imports necessary modules from NLTK and matplotlib
+- Downloads required NLTK tokenizer data
 
-### Create Frequency Distribution:
-    Use FreqDist(tokens) to create a frequency distribution object.
-    This object tracks how many times each word appears in the text.
+### 2. Data Preparation
+- Defines sample text (excerpt from literature)
+- Text is stored as a multi-line string for processing
 
-### Print Top 10 Most Frequent Tokens (Verification):
-    Use a loop to iterate through the top 10 most common tokens (freq_dist.most_common(10)) and print their corresponding frequencies.
+### 3. Text Processing
+- Tokenizes text into individual words and punctuation
+- Creates frequency distribution of tokens
+- Prints top 10 most frequent tokens for verification
 
-### Create and Display Plot (Built-in NLTK Method):
-    Set the figure size using plt.figure(figsize=(12, 6)).
-    Plot the frequency distribution using freq_dist.plot(20) (plots the 20 most frequent tokens).
-    Add a title, labels, and rotate x-axis labels for better readability.
-    Use plt.tight_layout() to prevent label cutoff.
-    Display the plot using plt.show().
+### 4. Visualization
+- Implements two different plotting methods:
+  1. NLTK's built-in frequency distribution plot
+  2. Custom matplotlib bar plot
+- Both plots include:
+  - Figure size specification
+  - Title and axis labels
+  - Rotated x-axis labels
+  - Layout adjustment
 
-### Alternative Plot Using Matplotlib Directly:
-    Create separate lists for words (words) and their frequencies (freqs) from the top 20 entries in the frequency distribution.
-    Generate a bar chart using plt.bar(words, freqs).
-    Add a title, labels, and rotate x-axis labels.
-    Use plt.tight_layout() to prevent label cutoff.
-    Display the plot using plt.show().
-
-***
-
-# Conclusion:
-
-This code successfully demonstrates how to analyze text using NLTK and visualize the distribution of word frequencies. You can adapt this approach to analyze different text sources and explore other NLTK features for further text processing tasks.
+### 5. Code Style Notes
+- Consistent comment formatting
+- Clear section separation
+- Proper indentation
+- Descriptive variable names
