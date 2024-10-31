@@ -1,61 +1,64 @@
-# NLTK Text Tokenization Project
+# Title: Text Analysis with NLTK: Frequency Distribution Visualization
 
-## Description
-This project demonstrates basic text tokenization and frequency analysis using NLTK (Natural Language Toolkit) in Python. The notebook contains code for tokenizing text, analyzing token frequencies, and visualizing the results using matplotlib.
+***
 
-## Features
-- Text tokenization using NLTK
-- Token frequency analysis
-- Frequency distribution visualization
-- Basic text cleaning (lowercase conversion and punctuation removal)
+## Introduction:
 
-## Prerequisites
-- Python 3.x
-- Google Colab or Jupyter Notebook
-- Required libraries:
-  - nltk
-  - matplotlib
+This document outlines the process of analyzing text using the Natural Language Toolkit (NLTK) library in Python. We'll focus on creating a frequency distribution of tokens (words) in a sample text and visualizing the results with two plotting methods.
 
-## Installation
-```bash
-pip install nltk
-```
+***
 
-## Usage
-1. Open the notebook in Google Colab or Jupyter Notebook
-2. Run the cells in sequence
-3. The code will:
-   - Tokenize the provided text
-   - Calculate token frequencies
-   - Generate visualization of token distribution
-   - Provide cleaned token analysis
+## Prerequisites:
 
-## Sample Output
-- List of tokens
-- Frequency distribution of tokens
-- Bar plot of token frequencies
-- Cleaned token analysis
+    * Python 3.x installed
+    * NLTK library (```pip install nltk```)
+    * Matplotlib library (```pip install matplotlib```)
 
-## Code Structure
-```python
-# Install NLTK
-!pip install nltk
+***
 
-# Import libraries
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.probability import FreqDist
-import matplotlib.pyplot as plt
+## Steps:
 
-# Download NLTK data
-nltk.download('punkt')
-```
+### Install and Import Libraries:
+Install NLTK using pip install nltk.
+Import necessary libraries:
+    * nltk: For natural language processing tasks.
+    word_tokenize from nltk.tokenize: To split text into words.
+    * FreqDist from nltk.probability: To calculate word frequencies.
+    matplotlib.pyplot as plt: For creating visualizations.
 
-## Exercise Details
-This code was created as part of the "Conversational AI: History, Applications, Future" course (WiSe_24/25) under Dr. Svetlana Meissner.
+### Download Required NLTK Data:
+    Use nltk.download('punkt') to download the tokenizer model for sentence segmentation.
 
-## Author
-Mohammad Kawash
+### Create Sample Text:
+    Define a string variable text containing the sample text you want to analyze.
 
-## License
-This project is available for educational purposes.
+### Tokenize the Text:
+    Apply word_tokenize(text) to split the text into individual words (tokens).
+    This stores the tokens in a list named tokens.
+
+### Create Frequency Distribution:
+    Use FreqDist(tokens) to create a frequency distribution object.
+    This object tracks how many times each word appears in the text.
+
+### Print Top 10 Most Frequent Tokens (Verification):
+    Use a loop to iterate through the top 10 most common tokens (freq_dist.most_common(10)) and print their corresponding frequencies.
+
+### Create and Display Plot (Built-in NLTK Method):
+    Set the figure size using plt.figure(figsize=(12, 6)).
+    Plot the frequency distribution using freq_dist.plot(20) (plots the 20 most frequent tokens).
+    Add a title, labels, and rotate x-axis labels for better readability.
+    Use plt.tight_layout() to prevent label cutoff.
+    Display the plot using plt.show().
+
+### Alternative Plot Using Matplotlib Directly:
+    Create separate lists for words (words) and their frequencies (freqs) from the top 20 entries in the frequency distribution.
+    Generate a bar chart using plt.bar(words, freqs).
+    Add a title, labels, and rotate x-axis labels.
+    Use plt.tight_layout() to prevent label cutoff.
+    Display the plot using plt.show().
+
+***
+
+# Conclusion:
+
+This code successfully demonstrates how to analyze text using NLTK and visualize the distribution of word frequencies. You can adapt this approach to analyze different text sources and explore other NLTK features for further text processing tasks.
